@@ -90,4 +90,14 @@ public class UserService {
             return "Invalid current username or password!";
         }
     }
+
+    public boolean deleteUser(String username, String password) {
+        Optional<User> userOptional = userRepository.findByUsernameAndPassword(username, password);
+
+        if (userOptional.isPresent()) {
+            userRepository.delete(userOptional.get());
+            return true;
+        }
+        return false;
+    }
 }

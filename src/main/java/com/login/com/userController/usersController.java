@@ -42,5 +42,16 @@ public class usersController {
         return ResponseEntity.ok(response);
     }
 
+    // DELETE API to remove a user
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> deleteUser(@RequestParam String username, @RequestParam String password) {
+        boolean isDeleted = userService.deleteUser(username, password);
+        if (isDeleted) {
+            return ResponseEntity.ok("User deleted successfully!");
+        } else {
+            return ResponseEntity.badRequest().body("Invalid username or password. User not found.");
+        }
+    }
+
 
 }
